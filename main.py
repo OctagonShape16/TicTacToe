@@ -4,7 +4,7 @@ import copy
 
 class Board:
     def __init__(self):
-        self.state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        self.state = [0, 0, 0, 0, 0, 0, 0, 0, 0] 
 
     def sign_to_printable(self, sign):
         match sign:
@@ -30,21 +30,21 @@ class Board:
     
     def check_win(self, symbol):
         s = symbol
-        if self.state[0] == s and self.state[1] == s and self.state[2] == s:
+        if self.state[0] == s and self.state[1] == s and self.state[2] == s: 
             return True
         elif self.state[3] == s and self.state[4] == s and self.state[5] == s:
             return True
         elif self.state[6] == s and self.state[7] == s and self.state[8] == s:
             return True
 
-        elif self.state[0] == s and self.state[3] == s and self.state[6] == s:
+        elif self.state[0] == s and self.state[3] == s and self.state[6] == s: 
             return True
         elif self.state[1] == s and self.state[4] == s and self.state[7] == s:
             return True
         elif self.state[2] == s and self.state[5] == s and self.state[8] == s:
             return True
 
-        elif self.state[0] == s and self.state[4] == s and self.state[8] == s:
+        elif self.state[0] == s and self.state[4] == s and self.state[8] == s: 
             return True
         elif self.state[2] == s and self.state[4] == s and self.state[6] == s:
             return True
