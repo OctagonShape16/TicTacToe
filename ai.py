@@ -18,6 +18,7 @@ class AI:
     def make_move(self, board):
         pass
 
+# move generation using minimax algorithm
 class MiniMax(AI):
     def __init__(self):
         super().__init__()
@@ -69,7 +70,8 @@ class MiniMax(AI):
                 if beta <= alpha:
                     break
             return min_eval, best_move
-        
+
+# random move generation       
 class RandomMove(AI):
     def __init__(self):
         super().__init__()

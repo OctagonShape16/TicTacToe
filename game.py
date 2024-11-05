@@ -1,6 +1,6 @@
-import random
 from ai import MiniMax, RandomMove
 
+# represents physical board
 class Board:
     def __init__(self):
         self.state = [0, 0, 0, 0, 0, 0, 0, 0, 0] 
@@ -63,6 +63,7 @@ class Player:
             self.symbol = symbol
             self.tag = "p"
 
+# main game loop
 class Game:
     def __init__(self, id, mode):
         self.id = id

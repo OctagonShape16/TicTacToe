@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "tictactoe"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "A TicTacToe Game with a variety of AIs in Python "
+authors = ["Paul Goedsche <paul.goedsche@web.de>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
