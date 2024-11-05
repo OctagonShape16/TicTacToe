@@ -29,5 +29,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.13"
-content-hash = "e2dae73f996044c06873c8febe76febf936d26afcfaa1d1f586cee3322dbfa2c"
+python-versions = "^3.10"
+content-hash = "2f214d1ebcb8957b167ad9876fd76c729a1a59eff3daec6555d2c51309b0a63c"

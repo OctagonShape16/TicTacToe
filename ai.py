@@ -14,22 +14,22 @@ class AI:
             if board.check_move(i):
                 moves.append(i)
         return moves
-    
+
     def make_move(self, board):
         pass
 
-# move generation using minimax algorithm
 class MiniMax(AI):
+    "move generation using minimax algorithm"
     def __init__(self):
         super().__init__()
-    
+
     def make_move(self, board):
         if self.symbol == 1:
             _, move = self.minimax(board, 9, -math.inf, math.inf, True)
         else:
             _, move = self.minimax(board, 9, -math.inf, math.inf, False)
         return move
-    
+
     def minimax(self, board, depth, alpha, beta, is_maximizing):
         if board.check_win(1):
             self.count += 1
@@ -53,9 +53,9 @@ class MiniMax(AI):
                     best_move = i
                 alpha = max(alpha, eval)
                 if alpha >= beta:
-                    break 
+                    break
             return max_eval, best_move
-        
+
         else:
             min_eval = math.inf
             best_move = None
@@ -71,8 +71,8 @@ class MiniMax(AI):
                     break
             return min_eval, best_move
 
-# random move generation       
 class RandomMove(AI):
+    "generates random move"
     def __init__(self):
         super().__init__()
 

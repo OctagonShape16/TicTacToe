@@ -1,9 +1,9 @@
 from ai import MiniMax, RandomMove
 
-# represents physical board
 class Board:
+    "represents physical board"
     def __init__(self):
-        self.state = [0, 0, 0, 0, 0, 0, 0, 0, 0] 
+        self.state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     def sign_to_printable(self, sign):
         match sign:
@@ -13,41 +13,47 @@ class Board:
                 return "O"
             case 0:
                 return " "
-            
+
     def print_board(self):
-        print(" " + self.sign_to_printable(self.state[0]) + " | " + self.sign_to_printable(self.state[1]) + " | " + self.sign_to_printable(self.state[2]) + " \n" +
+        print(" " + self.sign_to_printable(self.state[0]) + " | " +
+              self.sign_to_printable(self.state[1]) + " | " +
+              self.sign_to_printable(self.state[2]) + " \n" +
               " ---------\n" +
-              " " + self.sign_to_printable(self.state[3]) + " | " + self.sign_to_printable(self.state[4]) + " | " + self.sign_to_printable(self.state[5]) + " \n" +
+              " " + self.sign_to_printable(self.state[3]) + " | " +
+              self.sign_to_printable(self.state[4]) + " | " +
+              self.sign_to_printable(self.state[5]) + " \n" +
               " ---------\n" +
-              " " + self.sign_to_printable(self.state[6]) + " | " + self.sign_to_printable(self.state[7]) + " | " + self.sign_to_printable(self.state[8]) + " \n")
-        
+              " " + self.sign_to_printable(self.state[6]) + " | " +
+              self.sign_to_printable(self.state[7]) + " | " +
+              self.sign_to_printable(self.state[8]) + " \n")
+
     def is_full(self):
         for i in self.state:
             if i == 0:
                 return False
         return True
-    
+
     def check_win(self, symbol):
         s = symbol
-        if self.state[0] == s and self.state[1] == s and self.state[2] == s: 
+        if self.state[0] == s and self.state[1] == s and self.state[2] == s:
             return True
         elif self.state[3] == s and self.state[4] == s and self.state[5] == s:
             return True
         elif self.state[6] == s and self.state[7] == s and self.state[8] == s:
             return True
 
-        elif self.state[0] == s and self.state[3] == s and self.state[6] == s: 
+        elif self.state[0] == s and self.state[3] == s and self.state[6] == s:
             return True
         elif self.state[1] == s and self.state[4] == s and self.state[7] == s:
             return True
         elif self.state[2] == s and self.state[5] == s and self.state[8] == s:
             return True
 
-        elif self.state[0] == s and self.state[4] == s and self.state[8] == s: 
+        elif self.state[0] == s and self.state[4] == s and self.state[8] == s:
             return True
         elif self.state[2] == s and self.state[4] == s and self.state[6] == s:
             return True
-    
+
     def make_move(self, cell, symbol):
         if self.check_move(cell):
             self.state[cell] = symbol
@@ -57,14 +63,14 @@ class Board:
             return True
         else:
             return False
-        
+
 class Player:
     def __init__(self, symbol):
             self.symbol = symbol
             self.tag = "p"
 
-# main game loop
 class Game:
+    "main game loop"
     def __init__(self, id, mode):
         self.id = id
         self.mode = mode
@@ -93,16 +99,19 @@ class Game:
 
             if self.current_player.tag == "ai":
                 move = self.ai.make_move(self.board)
-                print(f"AI chooses position {move + 1}, after looking at {self.ai.count} different games\n")
+                print(
+                    f"AI chooses position {move + 1}, " +
+                     f"after looking at {self.ai.count} different games\n")
                 move = str(move + 1)
                 self.ai.count = 0
             else:
-                move = input(f"Player {self.current_player.symbol}, make your move (1-9): ")
+                move = input(
+                    f"Player {self.current_player.symbol}, make your move (1-9): ")
 
             if move.isdigit():
                 move = int(move)
                 if 1 <= move <= 9:
-                    move -= 1 
+                    move -= 1
                     if self.board.check_move(move):
                         self.board.make_move(move, self.current_player.symbol)
                         if self.board.check_win(self.current_player.symbol):
@@ -117,9 +126,14 @@ class Game:
                             self.done = True
                         else:
                             if self.mode == 1:
-                                self.current_player = self.player2 if self.current_player == self.player1 else self.player1
+                                self.current_player = (self.player2
+                                                       if self.current_player ==
+                                                       self.player1
+                                                       else self.player1)
                             else:
-                                self.current_player = self.player1 if self.current_player == self.ai else self.ai
+                                self.current_player = (self.player1
+                                                       if self.current_player == self.ai
+                                                       else self.ai)
                     else:
                         print("Invalid move. Try again.")
                 else:
