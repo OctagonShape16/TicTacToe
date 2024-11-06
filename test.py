@@ -69,7 +69,7 @@ if __name__ == "__main__":
         "[1: Random Move generation; 2: LLM; 3: Minimax]: ")
     print("\n")
     j = input("For how many iterations do you want to test the AI?:")
-    while not (i.isdigit() and 1 <= int(i)):
+    while not (j.isdigit() and 1 <= int(j)):
         print("Invalid input. Try again.")
         j = input("For how many iterations do you want to test the AI?:")
     j = int(j)
