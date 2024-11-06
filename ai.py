@@ -14,10 +14,13 @@ class AI:
             if board.check_move(i):
                 moves.append(i)
         return moves
-
+      
     def change_symbol(self):
         self.symbol = 1 if self.symbol == 2 else 2
 
+    def make_move(self, board):
+        pass
+      
     def make_move(self, board):
         pass
 
