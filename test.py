@@ -3,15 +3,17 @@ from game import Board
 
 class Test:
     "used to let 2 AIs play against each other"
-    def __init__(self, id, mode):
+    def __init__(self, id, engine):
         self.id = id
-        self.mode = mode
+        self.engine = engine # 1 = random move; 3 = minimax; TODO: 2 = LLM
         self.done = False
         self.outcome = None
         self.board = Board()
-        if mode == 1:
+        if engine == 1:
             self.player1 = RandomMove()
-        elif mode == 2:
+        elif engine == 2:
+            self.player1 = RandomMove()
+        elif engine == 3:
             self.player1 = Minimax()
         self.player2 = RandomMove()
         if self.player1.symbol == self.player2.symbol:
@@ -46,10 +48,11 @@ class Test:
         return self.outcome
 
 def benchmark(mode, iterations):
-    "collects the date from a lot of AI games and calculates the win rate of the specific engine"
+    """collects the date from a lot of AI games and
+    calculates the win rate of the specific engine"""
     wins = 0
-    for i in range(1, iterations+1):
-        test = Test(i, mode)
+    for i in range(iterations):
+        test = Test(i + 1, mode)
         if test.start() == 1:
             wins += 1
     percentage = "{:.2f}".format((wins / iterations) * 100)
@@ -58,18 +61,22 @@ def benchmark(mode, iterations):
 if __name__ == "__main__":
     i = input(
         "Which AI do you want to test? " +
-        "[1: Random Move generation (default); 2: Minimax]: ")
+        "[1: Random Move generation; 2: LLM; 3: Minimax]: ")
+    while not (i.isdigit() and 1 <= int(i) <= 3):
+        print("Invalid input. Try again.")
+        i = input(
+        "Which AI do you want to test? " +
+        "[1: Random Move generation; 2: LLM; 3: Minimax]: ")
     print("\n")
-    j = input("For how many iterations do you want to test the AI? (default=500):")
-    try:
-        j = int(j)
-    except ValueError:
-        j = 500
-    j = abs(j)
+    j = input("For how many iterations do you want to test the AI?:")
+    while not (i.isdigit() and 1 <= int(i)):
+        print("Invalid input. Try again.")
+        j = input("For how many iterations do you want to test the AI?:")
+    j = int(j)
     match i:
         case "1":
             benchmark(1, j)
         case "2":
             benchmark(2, j)
-        case other:
-            benchmark(1, j)
+        case "3":
+            benchmark(3, j)
