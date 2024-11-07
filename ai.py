@@ -15,10 +15,13 @@ class AI:
                 moves.append(i)
         return moves
 
+    def change_symbol(self):
+        self.symbol = 1 if self.symbol == 2 else 2
+
     def make_move(self, board):
         pass
 
-class MiniMax(AI):
+class Minimax(AI):
     "move generation using minimax algorithm"
     def __init__(self):
         super().__init__()
