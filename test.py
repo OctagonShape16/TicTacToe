@@ -1,18 +1,18 @@
-from ai import Minimax, RandomMove
+from ai import Minimax, RandomMove, LLM
 from game import Board
 
 class Test:
     "used to let 2 AIs play against each other"
     def __init__(self, id, engine):
         self.id = id
-        self.engine = engine # 1 = random move; 3 = minimax; TODO: 2 = LLM
+        self.engine = engine # 1 = random move; 2 = LLM; 3 = minimax
         self.done = False
         self.outcome = None
         self.board = Board()
         if engine == 1:
             self.player1 = RandomMove()
         elif engine == 2:
-            self.player1 = RandomMove()
+            self.player1 = LLM()
         elif engine == 3:
             self.player1 = Minimax()
         self.player2 = RandomMove()
@@ -33,18 +33,19 @@ class Test:
             move = self.current_player.make_move(self.board)
             self.current_player.count = 0
 
-            self.board.make_move(move, self.current_player.symbol)
-            if self.board.check_win(self.current_player.symbol):
-                if self.current_player == self.player1:
-                    self.outcome = 1
+            if self.board.check_move(move):
+                self.board.make_move(move, self.current_player.symbol)
+                if self.board.check_win(self.current_player.symbol):
+                    if self.current_player == self.player1:
+                        self.outcome = 1
+                    else:
+                        self.outcome = 2
+                    self.done = True
                 else:
-                    self.outcome = 2
-                self.done = True
-            else:
-                self.current_player = (self.player2
-                                       if self.current_player ==
-                                       self.player1
-                                       else self.player1)
+                    self.current_player = (self.player2
+                                        if self.current_player ==
+                                        self.player1
+                                        else self.player1)
         return self.outcome
 
 def benchmark(mode, iterations):
@@ -68,10 +69,10 @@ if __name__ == "__main__":
         "Which AI do you want to test? " +
         "[1: Random Move generation; 2: LLM; 3: Minimax]: ")
     print("\n")
-    j = input("For how many iterations do you want to test the AI?:")
+    j = input("For how many iterations do you want to test the AI?: ")
     while not (j.isdigit() and 1 <= int(j)):
         print("Invalid input. Try again.")
-        j = input("For how many iterations do you want to test the AI?:")
+        j = input("For how many iterations do you want to test the AI?: ")
     j = int(j)
     match i:
         case "1":

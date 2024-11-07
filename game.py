@@ -1,4 +1,4 @@
-from ai import Minimax, RandomMove
+from ai import Minimax, RandomMove, LLM
 
 class Board:
     "represents physical board"
@@ -73,14 +73,14 @@ class Game:
     "main game loop"
     def __init__(self, id, mode):
         self.id = id
-        self.mode = mode # 1 = two player mode; 2 = random move;  4 = minimax; TODO: 3 = LLM
+        self.mode = mode # 1 = two player mode; 2 = random move; 3 = LLM; 4 = minimax
         self.done = False
         self.board = Board()
         if self.mode >= 2:
             if self.mode == 2:
                 self.ai = RandomMove()
             elif self.mode == 3:
-                self.ai = RandomMove()
+                self.ai = LLM()
             elif self.mode == 4:
                 self.ai = Minimax()
             self.player1 = Player(1 if self.ai.symbol == 2 else 2)
@@ -95,7 +95,7 @@ class Game:
     def start(self):
         while not self.done:
             if self.board.is_full():
-                print("It's a tie!")
+                print("It's a draw!")
                 self.done = True
                 break
 
