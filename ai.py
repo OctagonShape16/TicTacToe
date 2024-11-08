@@ -1,6 +1,7 @@
 import math
 import copy
 import random
+from prompt import get_completion, create_message
 
 class AI:
     def __init__(self):
@@ -82,3 +83,20 @@ class RandomMove(AI):
     def make_move(self, board):
         move = random.choice(self.get_moves(board))
         return move
+
+class LLM(AI):
+    "move generation using a Large Language Model"
+    def __init__(self):
+        super().__init__()
+
+    def make_move(self, board):
+        message = create_message(self.convert_json(board))
+        move = get_completion(message)
+        move = int(move)
+        return move - 1
+
+    def convert_json(self, board):
+        json_board = {f"{i+1}":item for i, item in enumerate(board.state)}
+        json_board["moves"] = f"{[j + 1 for j in self.get_moves(board)]}"
+        json_board["symbol"] = f"{self.symbol}"
+        return json_board
