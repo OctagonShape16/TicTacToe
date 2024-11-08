@@ -37,8 +37,18 @@ Look at all the available moves provided \
 (do not play a move that is not in this list).
 Step 2:
 Calculate which of these moves is the best way for you to win \
-and also immediately stop your opponent from winning by looking into the future. \
-If there is an immediate oppurtunity to win or block your opponent, do that.
+and also stop your opponent from winning. \
+To do that follow this checklist:
+Is there a way to immediately win by placing 3 symbols in a row, column or diagonal? \
+If so immediately do that.
+Is there a way for your opponent to immediately win \
+by placing 3 symbols in a row, column or diagonal? If so immediately block this tile.
+Is there a way for you to create a fork now or in the future? \
+If so try to follow that plan.
+Is there a way for your opponent to fork you now or in the future? \
+If so try to stop that plan.
+If non of the named things are true just try to play logical moves, not loose and \
+always be strategic by visualizing the board and thinking about the future.
 Step 3:
 Output the move you chose as just a singular digit with no other information \
 (e.g your thought process or reasoning) not included."""
